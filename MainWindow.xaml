@@ -1,0 +1,48 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <Label Content="Search:" VerticalAlignment="Center"/>
+            <TextBox x:Name="SearchTextBox" Width="200" TextChanged="SearchTextBox_TextChanged"/>
+            <Label Content="Manufacturer:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <ComboBox x:Name="ManufacturerComboBox"  Width="150" SelectionChanged="ManufacturerComboBox_SelectionChanged"/>
+            <Button Content="Sort Ascending by Cost" Click="AscendingSortButton_Click" Margin="10,0,0,0"/>
+            <Button Content="Sort Descending by Cost" Click="DescendingSortButton_Click" Margin="10,0,0,0"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
+                <TextBlock Text="{Binding FilteredProducts.Count, StringFormat='{}Отображено {0} из '}"/>
+                <TextBlock Text="{Binding TotalRecordsCount, StringFormat='{}{0} записей'}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <ListView Grid.Row="1" ItemsSource="{Binding FilteredProducts}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding ProductId}" Header="Product ID"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding ArticleNumber}" Header="Article Number"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Product Name"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Unit}" Header="Unit"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Cost}" Header="Cost"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding MaximumDiscountAmount}" Header="Max Discount"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Manufacturer}" Header="Manufacturer"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Provider}" Header="Provider"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Category}" Header="Category"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding CurrentDiscount}" Header="Current Discount"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding QuantityInStock}" Header="Quantity in Stock"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Description"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Photo}" Header="Photo"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
